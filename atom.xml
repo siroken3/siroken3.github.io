@@ -4,7 +4,7 @@
   <title><![CDATA[Siroken's Labo]]></title>
   <link href="http://siroken3.github.io/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-02T00:18:11+09:00</updated>
+  <updated>2014-01-02T00:21:11+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -18,7 +18,7 @@
     <link href="http://siroken3.github.io/blog/2014/01/02/test-octpress-post/"/>
     <updated>2014-01-02T00:13:00+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/02/test-octpress-post</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>OctpressでPOSTを作るテストをしてみました。<!-- more -->本文はここにかけるようだ。</p>
 ]]></content>
   </entry>
   
