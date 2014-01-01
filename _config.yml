@@ -3,8 +3,8 @@
 # ----------------------- #
 
 url: http://siroken3.github.io
-title: Siroken LaboMemo
-subtitle: TECH MEMO
+title: Siroken's Labo
+subtitle: This
 author: Kenichi Sasaki
 simple_search: http://google.com/search
 description:
@@ -69,7 +69,7 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: siroken3
 twitter_tweet_button: true
 
 # Google +1
