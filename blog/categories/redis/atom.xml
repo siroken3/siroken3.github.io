@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Siroken's Labo]]></title>
-  <link href="http://siroken3.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Redis | Siroken's Labo]]></title>
+  <link href="http://siroken3.github.io/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
   <updated>2014-01-10T00:17:31+09:00</updated>
   <id>http://siroken3.github.io/</id>
@@ -21,27 +21,6 @@
     <content type="html"><![CDATA[<p>redisのconfigにkeep-aliveというのがある。クライアントが突然shutdownしたときにこれをサーバ側で検知するるにはkeep-aliveに適切な値を設定する必要がある(0だと無効)。推奨値は60。古いconnectionがずっと残っていたのをなんとかするために、同僚と検証。</p>
 
 <p>timeoutとい項目もあるがtwemproxyを使っている場合、timeoutによってkillされたコネクションは切られてしまい(再接続できない)、redisの再起動が必要なようだ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctpressでPOST作成テスト]]></title>
-    <link href="http://siroken3.github.io/blog/2014/01/02/test-octpress-post/"/>
-    <updated>2014-01-02T00:13:00+09:00</updated>
-    <id>http://siroken3.github.io/blog/2014/01/02/test-octpress-post</id>
-    <content type="html"><![CDATA[<p>OctpressでPOSTを作るテストをしてみました。<!-- more -->本文はここにかけるようだ。はじめは雑でもよいのでとにかく続けたい。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rvm list
-</span><span class='line'>rvm use
-</span><span class='line'>bundle exec rake generate
-</span><span class='line'>bundle exec rake preview
-</span><span class='line'>bundle exec rake deploy</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

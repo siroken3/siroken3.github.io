@@ -5,20 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>OctpressでPOST作成テスト - Siroken's Labo</title>
+  <title>Redis Config の Keep-alive - Siroken's Labo</title>
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="OctpressでPOSTを作るテストをしてみました。本文はここにかけるようだ。はじめは雑でもよいのでとにかく続けたい。 1
-2
-3
-4
-5
-rvm list
-rvm use
-bundle exec rake generate
-bundle exec rake preview
-bundle &hellip;">
+  <meta name="description" content="redisのconfigにkeep-aliveというのがある。クライアントが突然shutdownしたときにこれをサーバ側で検知するるにはkeep-aliveに適切な値を設定する必要がある(0だと無効)。推奨値は60。古いconnectionがずっと残っていたのをなんとかするために、同僚と検証。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +18,7 @@ bundle &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/02/test-octpress-post">
+  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/09/redis-keep-alive">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Siroken's Labo" type="application/atom+xml">
@@ -75,7 +66,7 @@ bundle &hellip;">
   
   <header>
     
-      <h1 class="entry-title">OctpressでPOST作成テスト</h1>
+      <h1 class="entry-title">Redis Config の Keep-alive</h1>
     
     
       <p class="meta">
@@ -91,26 +82,16 @@ bundle &hellip;">
   
 
 
-<time datetime="2014-01-02T00:13:00+09:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
+<time datetime="2014-01-09T23:56:23+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>OctpressでPOSTを作るテストをしてみました。<!-- more -->本文はここにかけるようだ。はじめは雑でもよいのでとにかく続けたい。</p>
+<div class="entry-content"><p>redisのconfigにkeep-aliveというのがある。クライアントが突然shutdownしたときにこれをサーバ側で検知するるにはkeep-aliveに適切な値を設定する必要がある(0だと無効)。推奨値は60。古いconnectionがずっと残っていたのをなんとかするために、同僚と検証。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rvm list
-</span><span class='line'>rvm use
-</span><span class='line'>bundle exec rake generate
-</span><span class='line'>bundle exec rake preview
-</span><span class='line'>bundle exec rake deploy</span></code></pre></td></tr></table></div></figure>
-
+<p>timeoutとい項目もあるがtwemproxyを使っている場合、timeoutによってkillされたコネクションは切られてしまい(再接続できない)、redisの再起動が必要なようだ。</p>
 </div>
 
 
@@ -133,15 +114,21 @@ bundle &hellip;">
   
 
 
-<time datetime="2014-01-02T00:13:00+09:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
+<time datetime="2014-01-09T23:56:23+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/redis/'>redis</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/02/test-octpress-post/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/02/test-octpress-post/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/09/redis-keep-alive/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/09/redis-keep-alive/" >Tweet</a>
   
   
   
@@ -150,8 +137,8 @@ bundle &hellip;">
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/01/02/test-octpress-post/" title="Previous Post: OctpressでPOST作成テスト">&laquo; OctpressでPOST作成テスト</a>
       
-        <a class="basic-alignment right" href="/blog/2014/01/09/redis-keep-alive/" title="Next Post: redis config の keep-alive">redis config の keep-alive &raquo;</a>
       
     </p>
   </footer>

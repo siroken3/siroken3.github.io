@@ -2,15 +2,19 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://siroken3.github.io/blog/2014/01/02/test-octpress-post/</loc>
-        <lastmod>2014-01-02T00:21:11+09:00</lastmod>
+        <lastmod>2014-01-10T00:17:15+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://siroken3.github.io/blog/2014/01/09/redis-keep-alive/</loc>
+        <lastmod>2014-01-10T00:10:56+09:00</lastmod>
     </url>
     <url>
         <loc>http://siroken3.github.io/blog/archives/</loc>
-        <lastmod>2014-01-02T00:21:11+09:00</lastmod>
+        <lastmod>2014-01-10T00:17:15+09:00</lastmod>
     </url>
     <url>
         <loc>http://siroken3.github.io/</loc>
-        <lastmod>2014-01-02T00:21:11+09:00</lastmod>
+        <lastmod>2014-01-10T00:17:15+09:00</lastmod>
     </url>
     <url>
         <loc>http://siroken3.github.io/robots.txt</loc>

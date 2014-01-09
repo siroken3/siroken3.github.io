@@ -9,7 +9,7 @@
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="OctpressでPOSTを作るテストをしてみました。">
+  <meta name="description" content="redisのconfigにkeep-aliveというのがある。クライアントが突然shutdownしたときにこれをサーバ側で検知するるにはkeep-aliveに適切な値を設定する必要がある(0だと無効)。推奨値は60。古いconnectionがずっと残っていたのをなんとかするために、同僚と検証。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +69,44 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/01/09/redis-keep-alive/">Redis Config の Keep-alive</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-09T23:56:23+09:00" pubdate data-updated="true">Jan 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>redisのconfigにkeep-aliveというのがある。クライアントが突然shutdownしたときにこれをサーバ側で検知するるにはkeep-aliveに適切な値を設定する必要がある(0だと無効)。推奨値は60。古いconnectionがずっと残っていたのをなんとかするために、同僚と検証。</p>
+
+<p>timeoutとい項目もあるがtwemproxyを使っている場合、timeoutによってkillされたコネクションは切られてしまい(再接続できない)、redisの再起動が必要なようだ。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/01/02/test-octpress-post/">OctpressでPOST作成テスト</a></h1>
     
     
@@ -114,6 +152,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/09/redis-keep-alive/">Redis Config の Keep-alive</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/02/test-octpress-post/">OctpressでPOST作成テスト</a>
