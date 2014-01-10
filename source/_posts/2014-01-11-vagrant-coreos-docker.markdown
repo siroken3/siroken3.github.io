@@ -14,5 +14,6 @@ Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ss
 * http://docs.vagrantup.com/v2/provisioning/docker.html
 * https://index.docker.io/u/fujin/influxdb/
 * http://shibayu36.hatenablog.com/entry/2013/12/07/233510
+* http://coreos.com/blog/coreos-vagrant-images/
 
 今日はInfluxDBが入ったdockerイメージをcoreosが起動した仮想マシンで稼働させ、ホストマシンから接続することまでできた。ホストマシン -> 仮想マシン -> docker の2段port forwardがキー。Vagrantには仮想マシンのポートをホストマシンにそのままFORWARDする機能があるように読めたが、どうも仮想マシンにprivate ipを付与することで会社のMacbookProでは成功するようだった。またdockerのポートフォワードは49000番以降になってることに注意が必要だった。
