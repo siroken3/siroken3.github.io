@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Siroken3のハイパー裏紙がわり]]></title>
+  <title><![CDATA[Siroken3のハイパー裏紙]]></title>
   <link href="http://siroken3.github.io/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-10T00:36:53+09:00</updated>
+  <updated>2014-01-11T01:24:54+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant+coreos+dockerをやってみた]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker/"/>
+    <updated>2014-01-11T00:59:37+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker</id>
+    <content type="html"><![CDATA[<p>自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。Vagrantは以前同僚が使っていたけれどよく分かってなくて放置してたのだけど楽に64bit仮想マシンが作れるので飛びついた次第。(もっと早く試していればよかった)</p>
+
+<p>Vagrantファイルを作ってそのディレクトリでvagrant upで仮想マシン起動、vagrant sshでその仮想マシンへssh接続。楽だった。
+Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ssh したあとやホストマシンと仮想マシンの共有ディレクトリにDockerfileをおいてdocker buildさせていたのが Vagrant upで全て行える模様。ちょっと今日のところは眠いのでブックマーク代わりにリンクを貼っておく。</p>
+
+<ul>
+<li><a href="http://iakio.hatenablog.com/entry/2013/11/28/002657">http://iakio.hatenablog.com/entry/2013/11/28/002657</a></li>
+<li><a href="http://docs.vagrantup.com/v2/provisioning/docker.html">http://docs.vagrantup.com/v2/provisioning/docker.html</a></li>
+<li><a href="https://index.docker.io/u/fujin/influxdb/">https://index.docker.io/u/fujin/influxdb/</a></li>
+<li><a href="http://shibayu36.hatenablog.com/entry/2013/12/07/233510">http://shibayu36.hatenablog.com/entry/2013/12/07/233510</a></li>
+</ul>
+
+
+<p>今日はInfluxDBが入ったdockerイメージをcoreosが起動した仮想マシンで稼働させ、ホストマシンから接続することまでできた。ホストマシン &ndash;> 仮想マシン &ndash;> docker の2段port forwardがキー。Vagrantには仮想マシンのポートをホストマシンにそのままFORWARDする機能があるように読めたが、どうも仮想マシンにprivate ipを付与することで会社のMacbookProでは成功するようだった。またdockerのポートフォワードは49000番以降になってることに注意が必要だった。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Redis Config の Keep-alive]]></title>
