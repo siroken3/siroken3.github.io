@@ -9,7 +9,12 @@
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。 &hellip;">
+  <meta name="description" content="Vagrantfileでdockerによるprovisionができるとのことで以下のようにしたらタイムアウトになってしまった。provision後にDockerfile作ったほうがよいのか。。途中経過がわからないままtimeoutになるのはしんどい。 1
+2
+3
+4
+5
+6 config.vm. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +76,56 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/01/12/vagrant-box/">Dockerでprovisionを欲張ってvagrant Upでtimeout</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-12T00:06:19+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Vagrantfileでdockerによるprovisionができるとのことで以下のようにしたらタイムアウトになってしまった。provision後にDockerfile作ったほうがよいのか。。途中経過がわからないままtimeoutになるのはしんどい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  config.vm.provision "docker" do |d|
+</span><span class='line'>    d.pull_images ["ubuntu"]
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get update"
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get upgrade -y"
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get install -y openssh-server nginx supervisor"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/01/11/vagrant-coreos-docker/">Vagrant+coreos+dockerをやってみた</a></h1>
     
     
@@ -104,6 +159,7 @@ Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ss
 <li><a href="http://docs.vagrantup.com/v2/provisioning/docker.html">http://docs.vagrantup.com/v2/provisioning/docker.html</a></li>
 <li><a href="https://index.docker.io/u/fujin/influxdb/">https://index.docker.io/u/fujin/influxdb/</a></li>
 <li><a href="http://shibayu36.hatenablog.com/entry/2013/12/07/233510">http://shibayu36.hatenablog.com/entry/2013/12/07/233510</a></li>
+<li><a href="http://coreos.com/blog/coreos-vagrant-images/">http://coreos.com/blog/coreos-vagrant-images/</a></li>
 </ul>
 
 
@@ -203,6 +259,10 @@ Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ss
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/12/vagrant-box/">Dockerでprovisionを欲張ってvagrant Upでtimeout</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/11/vagrant-coreos-docker/">Vagrant+coreos+dockerをやってみた</a>

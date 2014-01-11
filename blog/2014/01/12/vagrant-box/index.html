@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Redis - Siroken3のハイパー裏紙</title>
+  <title>Dockerでprovisionを欲張ってvagrant Upでtimeout - Siroken3のハイパー裏紙</title>
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="Category: redis">
+  <meta name="description" content="Vagrantfileでdockerによるprovisionができるとのことで以下のようにしたらタイムアウトになってしまった。provision後にDockerfile作ったほうがよいのか。。途中経過がわからないままtimeoutになるのはしんどい。 1
+2
+3
+4
+5
+6 config.vm. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://siroken3.github.ioblog/categories/redis">
+  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/12/vagrant-box">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Siroken3のハイパー裏紙" type="application/atom+xml">
@@ -64,35 +69,92 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Redis</h1>
+    
+      <h1 class="entry-title">Dockerでprovisionを欲張ってvagrant Upでtimeout</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-12T00:06:19+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Vagrantfileでdockerによるprovisionができるとのことで以下のようにしたらタイムアウトになってしまった。provision後にDockerfile作ったほうがよいのか。。途中経過がわからないままtimeoutになるのはしんどい。</p>
 
-  
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/01/09/redis-keep-alive/">Redis Config の Keep-alive</a></h1>
-<time datetime="2014-01-09T23:56:23+09:00" pubdate><span class='month'>Jan</span> <span class='day'>09</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/redis/'>redis</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  config.vm.provision "docker" do |d|
+</span><span class='line'>    d.pull_images ["ubuntu"]
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get update"
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get upgrade -y"
+</span><span class='line'>    d.run "ubuntu", cmd: "apt-get install -y openssh-server nginx supervisor"
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Kenichi Sasaki</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-12T00:06:19+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/12/vagrant-box/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/12/vagrant-box/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/11/vagrant-coreos-docker/" title="Previous Post: vagrant+coreos+dockerをやってみた">&laquo; vagrant+coreos+dockerをやってみた</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
