@@ -4,7 +4,7 @@
   <title><![CDATA[Siroken3のハイパー裏紙]]></title>
   <link href="http://siroken3.github.io/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-12T23:23:11+09:00</updated>
+  <updated>2014-01-13T01:21:50+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Dockerのubuntu Image へnginxをインストール少し前進]]></title>
+    <title type="html"><![CDATA[Dockerのubuntu Image へnginxをインストール試行錯誤]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/"/>
     <updated>2014-01-12T23:19:16+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx</id>
@@ -24,8 +24,32 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>docker ps -a</span></code></pre></td></tr></table></div></figure>
 
 
-<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。
-どうも、nginxをインストールする時に <a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a> にかかれているようにPPAを登録しないとnginxはインストールできなかった模様。</p>
+<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。</p>
+
+<p>nginxをインストールするには、以下のようにする必要がある。
+<a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a></p>
+
+<p>なので、この手順のようにVagrantのprovisionを書く必要がありそう。</p>
+
+<p>また、vagrant destroy で一旦クリーンな状態にしてubuntuイメージをvagrant のprovisionで取得させようとしたところやはりtimeoutになった。こちらは</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Pulling repository ubuntu
+</span><span class='line'>8xxxxxxxxxxx: Downloading [=============================================&gt;     ] 52.92 MB/58.34 MB 1m1s
+</span><span class='line'>b750fe79269d: Pulling dependent layers 
+</span><span class='line'>2yyyyyyyyyyy: Downloading [============================&gt;                      ] 54.59 MB/94.86 MB 7m19s</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と、ubuntuイメージの取得に結構時間がかかっている模様。(これはだいぶ経過してからのキャプチャ。最初は17minが表示されていた)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.vm.boot_timeout = 3600</span></code></pre></td></tr></table></div></figure>
+
+
+<p>などにした方がよさそうだけど、時間がかかり過ぎてる気が。。実運用にはprivate repositoryがよいんだろうな。ひとまずprovisionせずにDockerfileでFROM ubuntuして取得するところから。</p>
 ]]></content>
   </entry>
   
