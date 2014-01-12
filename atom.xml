@@ -4,7 +4,7 @@
   <title><![CDATA[Siroken3のハイパー裏紙]]></title>
   <link href="http://siroken3.github.io/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-12T01:44:58+09:00</updated>
+  <updated>2014-01-12T23:23:11+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dockerのubuntu Image へnginxをインストール少し前進]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/"/>
+    <updated>2014-01-12T23:19:16+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx</id>
+    <content type="html"><![CDATA[<p>昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker ps -a</span></code></pre></td></tr></table></div></figure>
+
+
+<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。
+どうも、nginxをインストールする時に <a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a> にかかれているようにPPAを登録しないとnginxはインストールできなかった模様。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dockerでprovisionを欲張ってvagrant Upでtimeout]]></title>

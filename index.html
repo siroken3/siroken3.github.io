@@ -9,12 +9,8 @@
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="Vagrantfileでdockerによるprovisionができるとのことで以下のようにしたらタイムアウトになってしまった。provision後にDockerfile作ったほうがよいのか。。途中経過がわからないままtimeoutになるのはしんどい。 1
-2
-3
-4
-5
-6 config.vm. &hellip;">
+  <meta name="description" content="昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り 1
+docker ps -a してみたら、apt-get install -u openssh-server nginx supervisorでexit &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +66,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/12/docker-ubuntu-nginx/">Dockerのubuntu Image へnginxをインストール少し前進</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-12T23:19:16+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker ps -a</span></code></pre></td></tr></table></div></figure>
+
+
+<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。
+どうも、nginxをインストールする時に <a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a> にかかれているようにPPAを登録しないとnginxはインストールできなかった模様。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -259,6 +298,10 @@ Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ss
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/12/docker-ubuntu-nginx/">Dockerのubuntu Image へnginxをインストール少し前進</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/12/vagrant-box/">Dockerでprovisionを欲張ってvagrant Upでtimeout</a>
