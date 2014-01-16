@@ -36,8 +36,14 @@ contact Vagrant support.
   config.vm.synced_folder ".", "/home/core/share"
 ```
 
-どうもtimeoutになるようなのでvagrant box add coreos URL で試してみたらcoreosは起動した模様。
-しかし、shared folderは
+どうもtimeoutになるようなので
+
+```
+vagrant box add coreos http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box
+vagrant up
+```
+
+で試してみたらcoreosは起動した模様。しかし、shared folderは
 
 ```
 [default] Machine booted and ready!
@@ -60,3 +66,5 @@ mount -t vboxsf -o uid=`id -u core`,gid=`id -g core` /home/core/share /home/core
 ```
 
 となり、失敗。Guest additionsなるものが足りないようだけど。coreosにはGuest additionがないのか。。？nfsにすればよかったかな。。まだよくわからないので今日はここまで。
+
+2014/1/17追記: vagrant box add coreos URL と書いてあった箇所の```URL```を使ったURLに加筆修正しました。
