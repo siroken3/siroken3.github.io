@@ -132,8 +132,15 @@
 </span><span class='line'>  config.vm.synced_folder ".", "/home/core/share"</span></code></pre></td></tr></table></div></figure>
 
 
-<p>どうもtimeoutになるようなのでvagrant box add coreos URL で試してみたらcoreosは起動した模様。
-しかし、shared folderは</p>
+<p>どうもtimeoutになるようなので</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add coreos http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box
+</span><span class='line'>vagrant up</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で試してみたらcoreosは起動した模様。しかし、shared folderは</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -172,6 +179,8 @@
 
 
 <p>となり、失敗。Guest additionsなるものが足りないようだけど。coreosにはGuest additionがないのか。。？nfsにすればよかったかな。。まだよくわからないので今日はここまで。</p>
+
+<p>2014/1/17追記: vagrant box add coreos URL と書いてあった箇所の<code>URL</code>を使ったURLに加筆修正しました。</p>
 </div>
 
 
@@ -214,6 +223,8 @@
         <a class="basic-alignment left" href="/blog/2014/01/12/docker-ubuntu-nginx/" title="Previous Post: dockerのubuntu image へnginxをインストール試行錯誤">&laquo; dockerのubuntu image へnginxをインストール試行錯誤</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/01/17/vagrant-coreos-shared-folder/" title="Next Post: Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)">Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗) &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -225,6 +236,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/17/vagrant-coreos-shared-folder/">Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/01/14/vagrant-coreos-shared-folder/">Vagrantによるcoreosでdockerのprovisioning (まだ失敗)</a>
@@ -240,10 +255,6 @@
     
       <li class="post">
         <a href="/blog/2014/01/11/vagrant-coreos-docker/">Vagrant+coreos+dockerをやってみた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/09/redis-keep-alive/">Redis Config の Keep-alive</a>
       </li>
     
   </ul>

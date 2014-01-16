@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗) - Siroken3のハイパー裏紙</title>
+  <meta name="author" content="Kenichi Sasaki">
+
+  
+  <meta name="description" content="全回のpostでdockerのprovisionをするために以下の道のりをたどっています。 Dockerfileをhost machineに用意
+それをshared folderで共有 nfsがhost machineになかったのでVagrantお任せしてみた ここでつまずいてる guest &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/17/vagrant-coreos-shared-folder">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Siroken3のハイパー裏紙" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Siroken3のハイパー裏紙</a></h1>
+  
+    <h2>つまり調べたことを忘れないためのメモ</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:siroken3.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T01:54:32+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>全回のpostでdockerのprovisionをするために以下の道のりをたどっています。</p>
+
+<ul>
+<li>Dockerfileをhost machineに用意</li>
+<li>それをshared folderで共有
+
+<ul>
+<li>nfsがhost machineになかったのでVagrantお任せしてみた
+
+<ul>
+<li>ここでつまずいてる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>guest machineのshell provisioningでdockerのrun</li>
+</ul>
+
+
+<p>ヤク毛刈りもいい加減にしないと。ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo aptitude install nfs-kernel-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で<code>vagrant reload</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[default] Attempting graceful shutdown of VM...
+</span><span class='line'>[default] Clearing any previously set forwarded ports...
+</span><span class='line'>[default] Clearing any previously set network interfaces...
+</span><span class='line'>[default] Preparing network interfaces based on configuration...
+</span><span class='line'>[default] Forwarding ports...
+</span><span class='line'>[default] -- 22 =&gt; 2222 (adapter 1)
+</span><span class='line'>[default] Running 'pre-boot' VM customizations...
+</span><span class='line'>[default] Booting VM...
+</span><span class='line'>[default] Waiting for machine to boot. This may take a few minutes...
+</span><span class='line'>[default] Machine booted and ready!
+</span><span class='line'>[default] No guest additions were detected on the base box for this VM! Guest
+</span><span class='line'>additions are required for forwarded ports, shared folders, host only
+</span><span class='line'>networking, and more. If SSH fails on this machine, please install
+</span><span class='line'>the guest additions and repackage the box to continue.
+</span><span class='line'>
+</span><span class='line'>This is not an error message; everything may continue to work properly,
+</span><span class='line'>in which case you may ignore this message.
+</span><span class='line'>[default] Configuring and enabling network interfaces...
+</span><span class='line'>No guest IP was given to the Vagrant core NFS helper. This is an
+</span><span class='line'>internal error that should be reported as a bug.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>うーん。bugですか・・? vagrant 1.4.0を使っていたのですが1.4.3がリリースされていたのでvagrant.comからdebパッケージファイルを入手してインストール。(Changelogとか見たほうがいいのでは。。)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo dpkg -i vagrant_1.4.3_i686.deb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そして一旦boxを削除してから再度挑戦。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant box remove coreos
+</span><span class='line'>$ vagrant box add coreos http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box
+</span><span class='line'>$ vagrant up
+</span><span class='line'>$[default] Configuring and enabling network interfaces...
+</span><span class='line'>[default] Exporting NFS shared folders...
+</span><span class='line'>Preparing to edit /etc/exports. Administrator privileges will be required...
+</span><span class='line'>[sudo] password for siroken3: 
+</span><span class='line'>nfsd not running
+</span><span class='line'> * Exporting directories for NFS kernel daemon...                                            [ OK ] 
+</span><span class='line'> * Starting NFS kernel daemon                                                                [ OK ] 
+</span><span class='line'>[default] Mounting NFS shared folders...
+</span><span class='line'>[default] VM already provisioned. Run `vagrant provision` or use `--provision` to force it
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なんかいい感じだー。そこで起動したcoreos box へsshでログイン。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant ssh
+</span><span class='line'>Last login: Thu Jan 16 17:20:42 UTC 2014 from 10.0.2.2 on ssh
+</span><span class='line'>   ______                ____  _____
+</span><span class='line'>  / ____/___  ________  / __ \/ ___/
+</span><span class='line'> / /   / __ \/ ___/ _ \/ / / /\__ \
+</span><span class='line'>/ /___/ /_/ / /  /  __/ /_/ /___/ /
+</span><span class='line'>\____/\____/_/   \___/\____//____/
+</span><span class='line'>core@localhost ~ $ ls -la
+</span><span class='line'>total 24
+</span><span class='line'>drwxr-xr-x 4 core core 4096 Jan 14 15:51 .
+</span><span class='line'>drwxr-xr-x 3 root root 4096 Jan 12 16:01 ..
+</span><span class='line'>-rw------- 1 core core 2113 Jan 16 16:43 .bash_history
+</span><span class='line'>drwx------ 3 core core 4096 Jan 16 17:20 .ssh
+</span><span class='line'>-rw-r--r-- 1 core core  343 Jan 13 15:20 Dockerfile
+</span><span class='line'>drwxr-xr-x 5 core core 4096 Jan 16 16:43 share
+</span><span class='line'>core@localhost ~ $ cd share/
+</span><span class='line'>core@localhost ~/share $ ls
+</span><span class='line'>README.md  Vagrantfile  cluster</span></code></pre></td></tr></table></div></figure>
+
+
+<p>おぉ、~/share 以下にhost machineのファイル達が見える!共有成功!ちょっと進んで気分が良いので今日はこれまで。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenichi Sasaki</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T01:54:32+09:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/17/vagrant-coreos-shared-folder/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/17/vagrant-coreos-shared-folder/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/14/vagrant-coreos-shared-folder/" title="Previous Post: Vagrantによるcoreosでdockerのprovisioning (まだ失敗)">&laquo; Vagrantによるcoreosでdockerのprovisioning (まだ失敗)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/17/vagrant-coreos-shared-folder/">Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/14/vagrant-coreos-shared-folder/">Vagrantによるcoreosでdockerのprovisioning (まだ失敗)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/12/docker-ubuntu-nginx/">Dockerのubuntu Image へnginxをインストール試行錯誤</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/12/vagrant-box/">Dockerでprovisionを欲張ってvagrant Upでtimeout</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/11/vagrant-coreos-docker/">Vagrant+coreos+dockerをやってみた</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenichi Sasaki -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
