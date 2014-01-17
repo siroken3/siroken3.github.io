@@ -13,7 +13,7 @@ categories:
      * ここでつまずいてる
  * guest machineのshell provisioningでdockerのrun
 
-ヤク毛刈りもいい加減にしないと。ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。
+ヤク毛刈りもいい加減にしないと。<!-- more -->ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。
 
 ```
 $ sudo aptitude install nfs-kernel-server

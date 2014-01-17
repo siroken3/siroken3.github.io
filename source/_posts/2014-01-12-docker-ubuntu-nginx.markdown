@@ -9,7 +9,7 @@ categories:
 ```
 docker ps -a
 ```
-してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。
+してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。<!-- more -->
 
 nginxをインストールするには、以下のようにする必要がある。
 http://wiki.nginx.org/InstallJa

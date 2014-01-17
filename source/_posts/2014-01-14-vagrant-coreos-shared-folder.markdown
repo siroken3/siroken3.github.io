@@ -5,7 +5,7 @@ date: 2014-01-14 23:51:17 +0900
 comments: true
 categories: 
 ---
-dockerによるprovisioningだとメッセージがでなくて不安になってくるので(実際時間がかかっているし)shell provisionならば情報が得られるかと思い試してみる。その前提としてshared folderを使えるようにしなくては。
+dockerによるprovisioningだとメッセージがでなくて不安になってくるので(実際時間がかかっているし)shell provisionならば情報が得られるかと思い試してみる。その前提としてshared folderを使えるようにしなくては。<!-- more -->
 
 coreosのVagrantfileのREADME.mdにshared folderの方法が書いてあったので、試してみた。
 
