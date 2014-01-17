@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Redis | Siroken3のハイパー裏紙]]></title>
+  <title><![CDATA[Category: redis | Siroken3のハイパー裏紙]]></title>
   <link href="http://siroken3.github.io/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-17T02:31:07+09:00</updated>
+  <updated>2014-01-17T23:37:11+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Redis Config の Keep-alive]]></title>
+    <title type="html"><![CDATA[redis config の keep-alive]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/09/redis-keep-alive/"/>
     <updated>2014-01-09T23:56:23+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/09/redis-keep-alive</id>

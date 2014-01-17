@@ -4,7 +4,7 @@
   <title><![CDATA[Siroken3のハイパー裏紙]]></title>
   <link href="http://siroken3.github.io/atom.xml" rel="self"/>
   <link href="http://siroken3.github.io/"/>
-  <updated>2014-01-17T02:31:07+09:00</updated>
+  <updated>2014-01-17T23:37:11+09:00</updated>
   <id>http://siroken3.github.io/</id>
   <author>
     <name><![CDATA[Kenichi Sasaki]]></name>
@@ -37,7 +37,7 @@
 </ul>
 
 
-<p>ヤク毛刈りもいい加減にしないと。ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。</p>
+<p>ヤク毛刈りもいい加減にしないと。<!-- more -->ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo aptitude install nfs-kernel-server</span></code></pre></td></tr></table></div></figure>
@@ -172,7 +172,7 @@
     <link href="http://siroken3.github.io/blog/2014/01/14/vagrant-coreos-shared-folder/"/>
     <updated>2014-01-14T23:51:17+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/14/vagrant-coreos-shared-folder</id>
-    <content type="html"><![CDATA[<p>dockerによるprovisioningだとメッセージがでなくて不安になってくるので(実際時間がかかっているし)shell provisionならば情報が得られるかと思い試してみる。その前提としてshared folderを使えるようにしなくては。</p>
+    <content type="html"><![CDATA[<p>dockerによるprovisioningだとメッセージがでなくて不安になってくるので(実際時間がかかっているし)shell provisionならば情報が得られるかと思い試してみる。その前提としてshared folderを使えるようにしなくては。<!-- more --></p>
 
 <p>coreosのVagrantfileのREADME.mdにshared folderの方法が書いてあったので、試してみた。</p>
 
@@ -266,7 +266,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Dockerのubuntu Image へnginxをインストール試行錯誤]]></title>
+    <title type="html"><![CDATA[dockerのubuntu image へnginxをインストール試行錯誤]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/"/>
     <updated>2014-01-12T23:19:16+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx</id>
@@ -276,7 +276,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>docker ps -a</span></code></pre></td></tr></table></div></figure>
 
 
-<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。</p>
+<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。<!-- more --></p>
 
 <p>nginxをインストールするには、以下のようにする必要がある。
 <a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a></p>
@@ -306,7 +306,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Dockerでprovisionを欲張ってvagrant Upでtimeout]]></title>
+    <title type="html"><![CDATA[dockerでprovisionを欲張ってvagrant upでtimeout]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/12/vagrant-box/"/>
     <updated>2014-01-12T00:06:19+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/12/vagrant-box</id>
@@ -329,11 +329,11 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Vagrant+coreos+dockerをやってみた]]></title>
+    <title type="html"><![CDATA[vagrant+coreos+dockerをやってみた]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker/"/>
     <updated>2014-01-11T00:59:37+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker</id>
-    <content type="html"><![CDATA[<p>自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。Vagrantは以前同僚が使っていたけれどよく分かってなくて放置してたのだけど楽に64bit仮想マシンが作れるので飛びついた次第。(もっと早く試していればよかった)</p>
+    <content type="html"><![CDATA[<p>自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。<!-- more -->Vagrantは以前同僚が使っていたけれどよく分かってなくて放置してたのだけど楽に64bit仮想マシンが作れるので飛びついた次第。(もっと早く試していればよかった)</p>
 
 <p>Vagrantファイルを作ってそのディレクトリでvagrant upで仮想マシン起動、vagrant sshでその仮想マシンへssh接続。楽だった。
 Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ssh したあとやホストマシンと仮想マシンの共有ディレクトリにDockerfileをおいてdocker buildさせていたのが Vagrant upで全て行える模様。ちょっと今日のところは眠いのでブックマーク代わりにリンクを貼っておく。</p>
@@ -352,7 +352,7 @@ Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ss
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Redis Config の Keep-alive]]></title>
+    <title type="html"><![CDATA[redis config の keep-alive]]></title>
     <link href="http://siroken3.github.io/blog/2014/01/09/redis-keep-alive/"/>
     <updated>2014-01-09T23:56:23+09:00</updated>
     <id>http://siroken3.github.io/blog/2014/01/09/redis-keep-alive</id>
