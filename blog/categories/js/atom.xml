@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: js | Siroken3のハイパー裏紙]]></title>
+  <link href="http://siroken3.github.io/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://siroken3.github.io/"/>
+  <updated>2014-01-22T02:09:39+09:00</updated>
+  <id>http://siroken3.github.io/</id>
+  <author>
+    <name><![CDATA[Kenichi Sasaki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[NVD3.js挑戦中]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/22/nvd3-dot-js/"/>
+    <updated>2014-01-22T01:58:39+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/22/nvd3-dot-js</id>
+    <content type="html"><![CDATA[<p>仕事の都合でこれまでと打って変わってNVD3.jsというグラフ描画ライブラリに挑戦中。DataSourceはRESTful APIで作成したのでこれを使って描画させる予定。</p>
+
+<ul>
+<li><a href="http://nvd3.org/">nvd3.org</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

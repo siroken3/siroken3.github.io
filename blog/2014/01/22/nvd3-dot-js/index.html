@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>dockerのubuntu image へnginxをインストール試行錯誤 - Siroken3のハイパー裏紙</title>
+  <title>NVD3.js挑戦中 - Siroken3のハイパー裏紙</title>
   <meta name="author" content="Kenichi Sasaki">
 
   
-  <meta name="description" content="昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り 1
-docker ps -a してみたら、apt-get install -u openssh-server nginx supervisorでexit &hellip;">
+  <meta name="description" content="仕事の都合でこれまでと打って変わってNVD3.jsというグラフ描画ライブラリに挑戦中。DataSourceはRESTful APIで作成したのでこれを使って描画させる予定。 nvd3.org ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/">
+  <link rel="canonical" href="http://siroken3.github.io/blog/2014/01/22/nvd3-dot-js/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +67,7 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
   
   <header>
     
-      <h1 class="entry-title">Dockerのubuntu Image へnginxをインストール試行錯誤</h1>
+      <h1 class="entry-title">NVD3.js挑戦中</h1>
     
     
       <p class="meta">
@@ -84,45 +83,19 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
   
 
 
-<time datetime="2014-01-12T23:19:16+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-01-22T01:58:39+09:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り</p>
+<div class="entry-content"><p>仕事の都合でこれまでと打って変わってNVD3.jsというグラフ描画ライブラリに挑戦中。DataSourceはRESTful APIで作成したのでこれを使って描画させる予定。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>docker ps -a</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li><a href="http://nvd3.org/">nvd3.org</a></li>
+</ul>
 
-
-<p>してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。<!-- more --></p>
-
-<p>nginxをインストールするには、以下のようにする必要がある。
-<a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a></p>
-
-<p>なので、この手順のようにVagrantのprovisionを書く必要がありそう。</p>
-
-<p>また、vagrant destroy で一旦クリーンな状態にしてubuntuイメージをvagrant のprovisionで取得させようとしたところやはりtimeoutになった。こちらは</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Pulling repository ubuntu
-</span><span class='line'>8xxxxxxxxxxx: Downloading [=============================================&gt;     ] 52.92 MB/58.34 MB 1m1s
-</span><span class='line'>b750fe79269d: Pulling dependent layers 
-</span><span class='line'>2yyyyyyyyyyy: Downloading [============================&gt;                      ] 54.59 MB/94.86 MB 7m19s</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と、ubuntuイメージの取得に結構時間がかかっている模様。(これはだいぶ経過してからのキャプチャ。最初は17minが表示されていた)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>config.vm.boot_timeout = 3600</span></code></pre></td></tr></table></div></figure>
-
-
-<p>などにした方がよさそうだけど、時間がかかり過ぎてる気が。。実運用にはprivate repositoryがよいんだろうな。ひとまずprovisionせずにDockerfileでFROM ubuntuして取得するところから。</p>
 </div>
 
 
@@ -145,12 +118,12 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
   
 
 
-<time datetime="2014-01-12T23:19:16+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+<time datetime="2014-01-22T01:58:39+09:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/docker/'>docker</a>
+    <a class='category' href='/blog/categories/js/'>js</a>
   
 </span>
 
@@ -159,7 +132,7 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://siroken3.github.io/blog/2014/01/22/nvd3-dot-js/" data-via="siroken3" data-counturl="http://siroken3.github.io/blog/2014/01/22/nvd3-dot-js/" >Tweet</a>
   
   
   
@@ -168,10 +141,8 @@ docker ps -a してみたら、apt-get install -u openssh-server nginx superviso
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/12/vagrant-box/" title="Previous Post: dockerでprovisionを欲張ってvagrant upでtimeout">&laquo; dockerでprovisionを欲張ってvagrant upでtimeout</a>
+        <a class="basic-alignment left" href="/blog/2014/01/17/vagrant-coreos-shared-folder/" title="Previous Post: Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)">&laquo; Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/14/vagrant-coreos-shared-folder/" title="Next Post: Vagrantによるcoreosでdockerのprovisioning (まだ失敗)">Vagrantによるcoreosでdockerのprovisioning (まだ失敗) &raquo;</a>
       
     </p>
   </footer>

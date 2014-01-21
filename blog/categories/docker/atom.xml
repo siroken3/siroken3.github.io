@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: docker | Siroken3のハイパー裏紙]]></title>
+  <link href="http://siroken3.github.io/blog/categories/docker/atom.xml" rel="self"/>
+  <link href="http://siroken3.github.io/"/>
+  <updated>2014-01-22T02:09:39+09:00</updated>
+  <id>http://siroken3.github.io/</id>
+  <author>
+    <name><![CDATA[Kenichi Sasaki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/17/vagrant-coreos-shared-folder/"/>
+    <updated>2014-01-17T01:54:32+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/17/vagrant-coreos-shared-folder</id>
+    <content type="html"><![CDATA[<p>全回のpostでdockerのprovisionをするために以下の道のりをたどっています。</p>
+
+<ul>
+<li>Dockerfileをhost machineに用意</li>
+<li>それをshared folderで共有
+
+<ul>
+<li>nfsがhost machineになかったのでVagrantお任せしてみた
+
+<ul>
+<li>ここでつまずいてる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>guest machineのshell provisioningでdockerのrun</li>
+</ul>
+
+
+<p>ヤク毛刈りもいい加減にしないと。<!-- more -->ひとまずShared Folderをなんとかしようとエラーメッセージに従いhost machine(ubuntu 13.10)にnfsをインストールしました。</p>
+
+<p><code>
+$ sudo aptitude install nfs-kernel-server
+</code></p>
+
+<p>で<code>vagrant reload</code>。</p>
+
+<p>```
+[default] Attempting graceful shutdown of VM&hellip;
+[default] Clearing any previously set forwarded ports&hellip;
+[default] Clearing any previously set network interfaces&hellip;
+[default] Preparing network interfaces based on configuration&hellip;
+[default] Forwarding ports&hellip;
+[default] &mdash; 22 => 2222 (adapter 1)
+[default] Running &lsquo;pre-boot&rsquo; VM customizations&hellip;
+[default] Booting VM&hellip;
+[default] Waiting for machine to boot. This may take a few minutes&hellip;
+[default] Machine booted and ready!
+[default] No guest additions were detected on the base box for this VM! Guest
+additions are required for forwarded ports, shared folders, host only
+networking, and more. If SSH fails on this machine, please install
+the guest additions and repackage the box to continue.</p>
+
+<p>This is not an error message; everything may continue to work properly,
+in which case you may ignore this message.
+[default] Configuring and enabling network interfaces&hellip;
+No guest IP was given to the Vagrant core NFS helper. This is an
+internal error that should be reported as a bug.
+```
+うーん。bugですか・・? vagrant 1.4.0を使っていたのですが1.4.3がリリースされていたのでvagrant.comからdebパッケージファイルを入手してインストール。(Changelogとか見たほうがいいのでは。。)</p>
+
+<p>```
+sudo dpkg -i vagrant_1.4.3_i686.deb</p>
+
+<p>```</p>
+
+<p>そして一旦boxを削除してから再度挑戦。</p>
+
+<p><code>``
+$ vagrant box remove coreos
+$ vagrant box add coreos http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box
+$ vagrant up
+$[default] Configuring and enabling network interfaces...
+[default] Exporting NFS shared folders...
+Preparing to edit /etc/exports. Administrator privileges will be required...
+[sudo] password for siroken3:
+nfsd not running
+ * Exporting directories for NFS kernel daemon...                                            [ OK ]
+ * Starting NFS kernel daemon                                                                [ OK ]
+[default] Mounting NFS shared folders...
+[default] VM already provisioned. Run</code>vagrant provision<code>or use</code>&mdash;provision` to force it</p>
+
+<p>```</p>
+
+<p>なんかいい感じだー。そこで起動したcoreos box へsshでログイン。</p>
+
+<p>```
+$ vagrant ssh
+Last login: Thu Jan 16 17:20:42 UTC 2014 from 10.0.2.2 on ssh</p>
+
+<hr />
+
+<p>  / <em><strong><em>/</em></strong>  </em><strong><em><strong><strong>  / </strong> \/ </strong></em>/
+ / /   / </strong> \/ <strong><em>/ _ \/ / / /_</em> \
+/ /</strong><em>/ /</em>/ / /  /  <strong>/ /<em>/ /</em></strong>/ /
+_<strong><em>/_</em></strong>/<em>/   _<strong>/_</strong></em>//____/
+core@localhost ~ $ ls -la
+total 24
+drwxr-xr-x 4 core core 4096 Jan 14 15:51 .
+drwxr-xr-x 3 root root 4096 Jan 12 16:01 ..
+-rw&mdash;&mdash;&mdash;&ndash; 1 core core 2113 Jan 16 16:43 .bash_history
+drwx&mdash;&mdash;&mdash; 3 core core 4096 Jan 16 17:20 .ssh
+-rw-r&mdash;r&mdash; 1 core core  343 Jan 13 15:20 Dockerfile
+drwxr-xr-x 5 core core 4096 Jan 16 16:43 share
+core@localhost ~ $ cd share/
+core@localhost ~/share $ ls
+README.md  Vagrantfile  cluster
+```</p>
+
+<p>おぉ、~/share 以下にhost machineのファイル達が見える!共有成功!ちょっと進んで気分が良いので今日はこれまで。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrantによるcoreosでdockerのprovisioning (まだ失敗)]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/14/vagrant-coreos-shared-folder/"/>
+    <updated>2014-01-14T23:51:17+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/14/vagrant-coreos-shared-folder</id>
+    <content type="html"><![CDATA[<p>dockerによるprovisioningだとメッセージがでなくて不安になってくるので(実際時間がかかっているし)shell provisionならば情報が得られるかと思い試してみる。その前提としてshared folderを使えるようにしなくては。<!-- more --></p>
+
+<p>coreosのVagrantfileのREADME.mdにshared folderの方法が書いてあったので、試してみた。</p>
+
+<p>```
+config.vm.network &ldquo;private_network&rdquo;, ip:&ldquo;172.12.8.150&rdquo;
+config.vm.synced_folder &ldquo;.&rdquo;, &ldquo;/home/core/share&rdquo;, id: &ldquo;core&rdquo;, :nfs => true, :mount_options => [&lsquo;nolock,vers=3,udp&rsquo;]</p>
+
+<p>```</p>
+
+<p>でも以下のメッセージが出てきて失敗。</p>
+
+<p>```
+There are errors in the configuration of this machine. Please fix
+the following errors and try again:</p>
+
+<p>vm:
+* It appears your machine doesn&rsquo;t support NFS, or there is not an
+adapter to enable NFS on this machine for Vagrant. Please verify
+that <code>nfsd</code> is installed on your machine, and try again. If you&rsquo;re
+on Windows, NFS isn&rsquo;t supported. If the problem persists, please
+contact Vagrant support.
+```</p>
+
+<p>ホストマシンにはnfsがセットアップされていなかったかも。でvagrantにお任せしてみました。</p>
+
+<p><code>
+  # shared folder
+  config.vm.synced_folder ".", "/home/core/share"
+</code></p>
+
+<p>どうもtimeoutになるようなので</p>
+
+<p><code>
+vagrant box add coreos http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box
+vagrant up
+</code></p>
+
+<p>で試してみたらcoreosは起動した模様。しかし、shared folderは</p>
+
+<p>```
+[default] Machine booted and ready!
+[default] No guest additions were detected on the base box for this VM! Guest
+additions are required for forwarded ports, shared folders, host only
+networking, and more. If SSH fails on this machine, please install
+the guest additions and repackage the box to continue.</p>
+
+<p>This is not an error message; everything may continue to work properly,
+in which case you may ignore this message.
+[default] Mounting shared folders&hellip;
+[default] &mdash; /home/core/share
+Failed to mount folders in Linux guest. This is usually beacuse
+the &ldquo;vboxsf&rdquo; file system is not available. Please verify that
+the guest additions are properly installed in the guest and
+can work properly. The command attempted was:</p>
+
+<p>mount -t vboxsf -o uid=<code>id -u core</code>,gid=<code>getent group core | cut -d: -f3</code> /home/core/share /home/core/share
+mount -t vboxsf -o uid=<code>id -u core</code>,gid=<code>id -g core</code> /home/core/share /home/core/share
+```</p>
+
+<p>となり、失敗。Guest additionsなるものが足りないようだけど。coreosにはGuest additionがないのか。。？nfsにすればよかったかな。。まだよくわからないので今日はここまで。</p>
+
+<p>2014/1/17追記: vagrant box add coreos URL と書いてあった箇所の<code>URL</code>を使ったURLに加筆修正しました。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[dockerのubuntu image へnginxをインストール試行錯誤]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx/"/>
+    <updated>2014-01-12T23:19:16+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/12/docker-ubuntu-nginx</id>
+    <content type="html"><![CDATA[<p>昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り
+<code>
+docker ps -a
+</code>
+してみたら、apt-get install -u openssh-server nginx supervisorでexit 100で失敗していた。<!-- more --></p>
+
+<p>nginxをインストールするには、以下のようにする必要がある。
+<a href="http://wiki.nginx.org/InstallJa">http://wiki.nginx.org/InstallJa</a></p>
+
+<p>なので、この手順のようにVagrantのprovisionを書く必要がありそう。</p>
+
+<p>また、vagrant destroy で一旦クリーンな状態にしてubuntuイメージをvagrant のprovisionで取得させようとしたところやはりtimeoutになった。こちらは</p>
+
+<p><code>
+Pulling repository ubuntu
+8xxxxxxxxxxx: Downloading [=============================================&gt;     ] 52.92 MB/58.34 MB 1m1s
+b750fe79269d: Pulling dependent layers
+2yyyyyyyyyyy: Downloading [============================&gt;                      ] 54.59 MB/94.86 MB 7m19s
+</code>
+と、ubuntuイメージの取得に結構時間がかかっている模様。(これはだいぶ経過してからのキャプチャ。最初は17minが表示されていた)</p>
+
+<p><code>
+config.vm.boot_timeout = 3600
+</code>
+などにした方がよさそうだけど、時間がかかり過ぎてる気が。。実運用にはprivate repositoryがよいんだろうな。ひとまずprovisionせずにDockerfileでFROM ubuntuして取得するところから。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[vagrant+coreos+dockerをやってみた]]></title>
+    <link href="http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker/"/>
+    <updated>2014-01-11T00:59:37+09:00</updated>
+    <id>http://siroken3.github.io/blog/2014/01/11/vagrant-coreos-docker</id>
+    <content type="html"><![CDATA[<p>自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。<!-- more -->Vagrantは以前同僚が使っていたけれどよく分かってなくて放置してたのだけど楽に64bit仮想マシンが作れるので飛びついた次第。(もっと早く試していればよかった)</p>
+
+<p>Vagrantファイルを作ってそのディレクトリでvagrant upで仮想マシン起動、vagrant sshでその仮想マシンへssh接続。楽だった。
+Vagrantのprovision機能にdockerが追加されたのでこれまでvagrant ssh したあとやホストマシンと仮想マシンの共有ディレクトリにDockerfileをおいてdocker buildさせていたのが Vagrant upで全て行える模様。ちょっと今日のところは眠いのでブックマーク代わりにリンクを貼っておく。</p>
+
+<ul>
+<li><a href="http://iakio.hatenablog.com/entry/2013/11/28/002657">http://iakio.hatenablog.com/entry/2013/11/28/002657</a></li>
+<li><a href="http://docs.vagrantup.com/v2/provisioning/docker.html">http://docs.vagrantup.com/v2/provisioning/docker.html</a></li>
+<li><a href="https://index.docker.io/u/fujin/influxdb/">https://index.docker.io/u/fujin/influxdb/</a></li>
+<li><a href="http://shibayu36.hatenablog.com/entry/2013/12/07/233510">http://shibayu36.hatenablog.com/entry/2013/12/07/233510</a></li>
+<li><a href="http://coreos.com/blog/coreos-vagrant-images/">http://coreos.com/blog/coreos-vagrant-images/</a></li>
+</ul>
+
+
+<p>今日はInfluxDBが入ったdockerイメージをcoreosが起動した仮想マシンで稼働させ、ホストマシンから接続することまでできた。ホストマシン &ndash;> 仮想マシン &ndash;> docker の2段port forwardがキー。Vagrantには仮想マシンのポートをホストマシンにそのままFORWARDする機能があるように読めたが、どうも仮想マシンにprivate ipを付与することで会社のMacbookProでは成功するようだった。またdockerのポートフォワードは49000番以降になってることに注意が必要だった。</p>
+]]></content>
+  </entry>
+  
+</feed>
