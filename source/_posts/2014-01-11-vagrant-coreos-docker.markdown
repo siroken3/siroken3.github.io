@@ -3,7 +3,7 @@ layout: post
 title: "vagrant+coreos+dockerをやってみた"
 date: 2014-01-11 00:59:37 +0900
 comments: true
-categories: 
+categories: docker
 ---
 自宅のマシンがubuntu 13.10の32bit版だったのでdockerが使えなくてあきらめかけていたけれど、VirtualBoxで64bitマシンを動かせばいいのだと思ったら俄然気になって、調べてたらVagrantでboxを作るのが楽そうということが分かった。<!-- more -->Vagrantは以前同僚が使っていたけれどよく分かってなくて放置してたのだけど楽に64bit仮想マシンが作れるので飛びついた次第。(もっと早く試していればよかった)
 

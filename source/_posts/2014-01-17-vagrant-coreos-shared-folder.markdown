@@ -3,7 +3,7 @@ layout: post
 title: "Vagrantによるcoreosでdockerのprovisioning(まだまだ失敗)"
 date: 2014-01-17 01:54:32 +0900
 comments: true
-categories: 
+categories: docker
 ---
 全回のpostでdockerのprovisionをするために以下の道のりをたどっています。
 

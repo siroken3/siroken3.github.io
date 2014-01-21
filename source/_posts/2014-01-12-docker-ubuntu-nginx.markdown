@@ -3,7 +3,7 @@ layout: post
 title: "dockerのubuntu image へnginxをインストール試行錯誤"
 date: 2014-01-12 23:19:16 +0900
 comments: true
-categories: 
+categories: docker
 ---
 昨日dockerのprovisioningでtimeoutになった原因を調べようと,vagrant sshでcoreosに入り
 ```
