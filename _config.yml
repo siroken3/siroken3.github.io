@@ -60,7 +60,7 @@ plugins:
 author:
   name   : "Kenichi SASAKI"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography ha mada dekite nai yo."
+  bio    : "biographyをこれから書くよ"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
