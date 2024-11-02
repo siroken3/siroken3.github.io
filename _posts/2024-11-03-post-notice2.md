@@ -1,5 +1,6 @@
 ---
 title: "Post: Notice2"
+date: 2024-11-03T00:32:30+09:00
 categories:
   - Blog
 tags:
